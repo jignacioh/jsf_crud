@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      locale="#{facesContext.externalContext.requestLocale}"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <h:body>
+        <ui:composition template="/plantillas/layout.xhtml">
+            <ui:define name="body">
+
+
+                <h:panelGroup id="pnlCatalogo" layout="block" style="width: 75%">
+                    <h:form id="master3">
+
+
+                        <h1>CATALOGO</h1>
+
+                        <p:dataTable id="tblCatalogoPrimefaces" var="producto" 
+                                     value="#{catalogoController.productos}"
+                                     paginator="true" lazy="true">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="Nro" />
+                                </f:facet>
+                                <h:outputText value="#{catalogoController.productos.indexOf(producto)+1}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="Nombre" />
+                                </f:facet>
+                                <h:outputText value="#{producto.nombre}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="Stock" />
+                                </f:facet>
+                                <h:outputText value="#{producto.stock}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="Precio x unidad" />
+                                </f:facet>
+                                <h:outputText value="#{producto.amount}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="Cantidad" />
+                                </f:facet>
+                                <h:inputText value="#{producto.cantidadComprar}" />
+                            </p:column>
+
+                        </p:dataTable>
+
+                        <h:panelGroup style="width: 100%; float: left;">
+                            <h:panelGroup style="display: inline-table; width: 75%; float: left;"><br/></h:panelGroup>
+                            <h:panelGroup style="display: inline-table; width: 6%; float: left;">Sub Total:</h:panelGroup>
+                            <h:panelGroup style="display: inline-table; width: 19%; float: right;"> <h:outputText value="#{catalogoController.factura.subtotal}"/></h:panelGroup>
+                        </h:panelGroup>
+                        <h:panelGroup style="width: 100%; float: left;">
+                            <h:panelGroup style="display: inline-table; width: 75%; float: left;"><br/></h:panelGroup>
+                            <h:panelGroup style="display: inline-table; width: 6%; float: left;">Impuestos:</h:panelGroup>
+                            <h:panelGroup style="display: inline-table; width: 19%; float: right;"><h:outputText value="#{catalogoController.factura.impuesto}"/></h:panelGroup>
+                        </h:panelGroup>
+
+                        <h:panelGroup style="width: 100%; float: left;">
+                            <h:panelGroup style="display: inline-table; width: 75%; float: left;"><br/></h:panelGroup>
+                            <h:panelGroup style="display: inline-table; width: 6%; float: left;">Total:</h:panelGroup>
+                            <h:panelGroup style="display: inline-table; width: 19%; float: right;"> <h:outputText value="#{catalogoController.factura.total}"/></h:panelGroup>
+                        </h:panelGroup>
+                        <h:panelGroup style="width: 100%; float: left;">
+                            <h:panelGroup style="display: inline-table; width: 66%; float: left;"><br/></h:panelGroup>
+                            <p:commandButton style="display: inline-table; width: 16%; float: left;" value="Calcular Total" 
+                                             action="#{catalogoController.calcularTotal}"
+                                             ajax="true" update="@form"/>
+                            <p:commandButton  style="display: inline-table; width: 16%; float: left;" value="Generar Factura" />
+                        </h:panelGroup>
+                    </h:form>
+                </h:panelGroup>
+
+
+
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>
