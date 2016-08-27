@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 /**
@@ -22,9 +23,8 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean(name = "clienteController")
 @ViewScoped
 public class ClienteController implements Serializable{
-    
-    List<Usuario> clientes=new ArrayList<Usuario>();
-    List<Usuario> allClientes=new ArrayList<Usuario>();
+    @ManagedProperty(value = "#{loginController}")
+    private LoginController loginController;
     private Usuario clienteCreate;
     private String nombreCliente;
     private Usuario usuarioEdit;
@@ -32,33 +32,6 @@ public class ClienteController implements Serializable{
     
     @PostConstruct
     public void init(){
-        clientes = new ArrayList<>();
-        Usuario cliente = new Usuario();
-        cliente.setNombre("Juan");
-        cliente.setApellido("Perez");
-        cliente.setPassword("a123");
-        cliente.setUsername("jupe1");
-        clientes.add(cliente);
-        cliente = new Usuario();
-        cliente.setNombre("Jose");
-        cliente.setApellido("Anaya");
-        cliente.setPassword("xyz2");
-        cliente.setUsername("joan2");
-        clientes.add(cliente);
-        cliente = new Usuario();
-        cliente.setNombre("Ana");
-        cliente.setApellido("Hurtado");
-        cliente.setPassword("a1d2f4");
-        cliente.setUsername("anhu7");
-        clientes.add(cliente);
-        cliente = new Usuario();
-        cliente.setNombre("Maria");
-        cliente.setApellido("Cortez");
-        cliente.setPassword("o0p9i8");
-        cliente.setUsername("maco3");
-        clientes.add(cliente);
-        allClientes=new ArrayList<>();
-        allClientes.addAll(clientes);
         
     } 
     public void createCliente(){
@@ -66,35 +39,35 @@ public class ClienteController implements Serializable{
     }
     public void buscarCliente(){
         if (nombreCliente.isEmpty() || nombreCliente.trim().isEmpty()) {
-             clientes.clear();
-             clientes.addAll(allClientes);
+             loginController.getClientes().clear();
+             loginController.getClientes().addAll(loginController.getAllClientes());
          }else{
-             clientes.clear();
-            for (Usuario cliente : allClientes) {
+             loginController.getClientes().clear();
+            for (Usuario cliente : loginController.getAllClientes()) {
                 if (cliente.getNombre().contains(nombreCliente)) {
-                        clientes.add(cliente);
+                        loginController.getClientes().add(cliente);
                 }
             }
          }
     }
     public void create(){
-       allClientes.add(clienteCreate);
-       clientes.add(clienteCreate);
+       loginController.getAllClientes().add(clienteCreate);
+       loginController.getClientes().add(clienteCreate);
     }
     public void saveCliente(Usuario usuarioEdit){
-        setIndex(allClientes.indexOf(usuarioEdit)+"");
+        setIndex(loginController.getAllClientes().indexOf(usuarioEdit)+"");
         this.usuarioEdit=usuarioEdit;
     }
      public void deleteCliente(Usuario usuario){
-        clientes.remove(usuario);
-        allClientes.remove(usuario);
+        loginController.getClientes().remove(usuario);
+        loginController.getAllClientes().remove(usuario);
     }
      public String getIndex() {
         return index;
     }
     public void save(){
         
-        allClientes.set(Integer.parseInt(getIndex()), usuarioEdit);
+        loginController.getAllClientes().set(Integer.parseInt(getIndex()), usuarioEdit);
         
     }
     public void setIndex(String index) {
@@ -116,28 +89,21 @@ public class ClienteController implements Serializable{
         this.nombreCliente = nombreCliente;
     }
 
-    public List<Usuario> getClientes() {
-        return clientes;
-    }
-
-    public void setClientes(List<Usuario> clientes) {
-        this.clientes = clientes;
-    }
-
-    public List<Usuario> getAllClientes() {
-        return allClientes;
-    }
-
-    public void setAllClientes(List<Usuario> allClientes) {
-        this.allClientes = allClientes;
-    }
-
+   
     public Usuario getUsuarioEdit() {
         return usuarioEdit;
     }
 
     public void setUsuarioEdit(Usuario usuarioEdit) {
         this.usuarioEdit = usuarioEdit;
+    }
+
+    public LoginController getLoginController() {
+        return loginController;
+    }
+
+    public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
     }
     
     

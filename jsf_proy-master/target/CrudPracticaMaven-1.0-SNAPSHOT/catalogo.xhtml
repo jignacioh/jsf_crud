@@ -27,13 +27,13 @@ and open the template in the editor.
                         <h1>CATALOGO</h1>
 
                         <p:dataTable id="tblCatalogoPrimefaces" var="producto" 
-                                     value="#{catalogoController.productos}"
+                                     value="#{catalogoController.loginController.productos}"
                                      paginator="true" lazy="true">
                             <p:column>
                                 <f:facet name="header">
                                     <h:outputLabel value="Nro" />
                                 </f:facet>
-                                <h:outputText value="#{catalogoController.productos.indexOf(producto)+1}" />
+                                <h:outputText value="#{catalogoController.loginController.productos.indexOf(producto)+1}" />
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
@@ -63,27 +63,27 @@ and open the template in the editor.
                         </p:dataTable>
 
                         <h:panelGroup style="width: 100%; float: left;">
-                            <h:panelGroup style="display: inline-table; width: 75%; float: left;"><br/></h:panelGroup>
+                            <h:panelGroup style="display: inline-table; width: 65%; float: left;"><br/></h:panelGroup>
                             <h:panelGroup style="display: inline-table; width: 6%; float: left;">Sub Total:</h:panelGroup>
                             <h:panelGroup style="display: inline-table; width: 19%; float: right;"> <h:outputText value="#{catalogoController.factura.subtotal}"/></h:panelGroup>
                         </h:panelGroup>
                         <h:panelGroup style="width: 100%; float: left;">
-                            <h:panelGroup style="display: inline-table; width: 75%; float: left;"><br/></h:panelGroup>
+                            <h:panelGroup style="display: inline-table; width: 65%; float: left;"><br/></h:panelGroup>
                             <h:panelGroup style="display: inline-table; width: 6%; float: left;">Impuestos:</h:panelGroup>
                             <h:panelGroup style="display: inline-table; width: 19%; float: right;"><h:outputText value="#{catalogoController.factura.impuesto}"/></h:panelGroup>
                         </h:panelGroup>
 
                         <h:panelGroup style="width: 100%; float: left;">
-                            <h:panelGroup style="display: inline-table; width: 75%; float: left;"><br/></h:panelGroup>
+                            <h:panelGroup style="display: inline-table; width: 65%; float: left;"><br/></h:panelGroup>
                             <h:panelGroup style="display: inline-table; width: 6%; float: left;">Total:</h:panelGroup>
                             <h:panelGroup style="display: inline-table; width: 19%; float: right;"> <h:outputText value="#{catalogoController.factura.total}"/></h:panelGroup>
                         </h:panelGroup>
                         <h:panelGroup style="width: 100%; float: left;">
-                            <h:panelGroup style="display: inline-table; width: 66%; float: left;"><br/></h:panelGroup>
+                            <h:panelGroup style="display: inline-table; width: 60%; float: left;"><br/></h:panelGroup>
                             <p:commandButton style="display: inline-table; width: 16%; float: left;" value="Calcular Total" 
                                              action="#{catalogoController.calcularTotal}"
                                              ajax="true" update="@form"/>
-                            <p:commandButton  style="display: inline-table; width: 16%; float: left;" value="Generar Factura" />
+                            <p:commandButton  style="display: inline-table; width: 18%; float: left;" value="Generar Factura" />
                         </h:panelGroup>
                     </h:form>
                 </h:panelGroup>

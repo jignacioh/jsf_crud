@@ -24,7 +24,7 @@ import javax.faces.event.ActionEvent;
 @ViewScoped
 public class MantenimientoController implements Serializable{
     
-    private List<Producto> productos,allProductos;
+   
     private ProductoDataModel productosDataModel;
     @ManagedProperty(value = "#{loginController}")
     private LoginController loginController;
@@ -35,33 +35,6 @@ public class MantenimientoController implements Serializable{
     private Producto productoCreate;
     @PostConstruct
     public void init(){
-        productos=new ArrayList<>();
-        Producto producto = new Producto();
-        producto.setCodigo("AB1");
-        producto.setNombre("mesa");
-        producto.setStock(30);
-        producto.setAmount(20.50);
-        productos.add(producto);
-        producto = new Producto();
-        producto.setCodigo("DF3");
-        producto.setNombre("mesa de oro");
-        producto.setAmount(10.30);
-        producto.setStock(13);
-        productos.add(producto);
-        producto = new Producto();
-        producto.setCodigo("TG2");
-        producto.setNombre("tv smart");
-        producto.setAmount(34.30);
-        producto.setStock(25);
-        productos.add(producto);
-         producto = new Producto();
-        producto.setCodigo("TH0");
-        producto.setNombre("tv analogica");
-        producto.setAmount(50.50);
-        producto.setStock(5);
-        productos.add(producto);
-        allProductos=new ArrayList<>();
-        allProductos.addAll(productos);
         
         cargarFiltros();
     }
@@ -78,12 +51,12 @@ public class MantenimientoController implements Serializable{
     }
     public void save(){
         
-        allProductos.set(Integer.parseInt(getIndex()), productoEdit);
+        loginController.getAllProductos().set(Integer.parseInt(getIndex()), productoEdit);
         
     }
     public void create(){
-       allProductos.add(productoCreate);
-       productos.add(productoCreate);
+       loginController.getAllProductos().add(productoCreate);
+       loginController.getProductos().add(productoCreate);
     }
      public void createProducto(){
        productoCreate=new Producto();
@@ -92,7 +65,7 @@ public class MantenimientoController implements Serializable{
         return index;
     }
     public void saveProducto(Producto productoEdit){
-        setIndex(allProductos.indexOf(productoEdit)+"");
+        setIndex(loginController.getAllProductos().indexOf(productoEdit)+"");
         this.productoEdit=productoEdit;
     }
     public void setIndex(String index) {
@@ -100,8 +73,8 @@ public class MantenimientoController implements Serializable{
     }
     
     public void deleteProducto(Producto producto){
-        productos.remove(producto);
-        allProductos.remove(producto);
+        loginController.getProductos().remove(producto);
+        loginController.getAllProductos().remove(producto);
     }
     
     public void cargarGenero(){
@@ -113,13 +86,13 @@ public class MantenimientoController implements Serializable{
     }
      public void buscarProducto(){
          if (nombreProducto.isEmpty() || nombreProducto.trim().isEmpty()) {
-             productos.clear();
-             productos.addAll(allProductos);
+              loginController.getProductos().clear();
+              loginController.getProductos().addAll( loginController.getAllProductos());
          }else{
-             productos.clear();
-            for (Producto producto : allProductos) {
+              loginController.getProductos().clear();
+            for (Producto producto :  loginController.getAllProductos()) {
                 if (producto.getNombre().contains(nombreProducto)) {
-                        productos.add(producto);
+                         loginController.getProductos().add(producto);
                 }
             }
          }
@@ -133,13 +106,7 @@ public class MantenimientoController implements Serializable{
         }
     }
 
-    public List<Producto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
-    }
+    
 
   
     public LoginController getLoginController() {

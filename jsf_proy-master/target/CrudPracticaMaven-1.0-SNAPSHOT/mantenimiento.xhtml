@@ -36,13 +36,13 @@
                         <h1>TABLA DE PRODUCTOS</h1>
 
                         <p:dataTable id="tblProductosPrimefaces" var="producto" 
-                                     value="#{mantenimientoController.productos}"
+                                     value="#{mantenimientoController.loginController.productos}"
                                      paginator="true" lazy="true">
                             <p:column>
                                 <f:facet name="header">
                                     <h:outputLabel value="Nro" />
                                 </f:facet>
-                                <h:outputText value="#{mantenimientoController.productos.indexOf(producto)+1}" />
+                                <h:outputText value="#{mantenimientoController.loginController.productos.indexOf(producto)+1}" />
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
@@ -117,7 +117,22 @@
                                              id="codigo">
                                 </h:inputText>   
                             </h:panelGroup>
-                            
+                             <h:outputLabel value="Stock:"/>
+                            <h:panelGroup>
+                                <h:inputText value="#{mantenimientoController.productoCreate.stock}" 
+                                             required="true"
+                                             label="Stock"
+                                             id="stock">
+                                </h:inputText>   
+                            </h:panelGroup>
+                             <h:outputLabel value="Precio/unidad:"/>
+                            <h:panelGroup>
+                                <h:inputText value="#{mantenimientoController.productoCreate.amount}" 
+                                             required="true"
+                                             label="Precio"
+                                             id="precio">
+                                </h:inputText>   
+                            </h:panelGroup>
                             <p:commandButton value="Añadir" action="#{mantenimientoController.create}"
                                              ajax="true" update="master2" oncomplete="PF('new_product').hide()"/>
                             <p:commandButton  value="Cerrar" onclick="PF('new_product').hide(); return false"/>

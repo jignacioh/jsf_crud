@@ -28,17 +28,17 @@
                         <h1>TABLA DE CLIENTES</h1>
 
                         <p:dataTable id="tblClientesPrimefaces" var="usuario" 
-                                     value="#{clienteController.clientes}"
+                                     value="#{clienteController.loginController.clientes}"
                                      paginator="true" lazy="true">
                             <p:column>
                                 <f:facet name="header">
                                     <h:outputLabel value="Nro" />
                                 </f:facet>
-                                <h:outputText value="#{clienteController.clientes.indexOf(usuario)+1}" />
+                                <h:outputText value="#{clienteController.loginController.clientes.indexOf(usuario)+1}" />
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
-                                    <h:outputLabel value="Codigo" />
+                                    <h:outputLabel value="Usuario" />
                                 </f:facet>
                                 <h:outputText value="#{usuario.username}" />
                             </p:column>

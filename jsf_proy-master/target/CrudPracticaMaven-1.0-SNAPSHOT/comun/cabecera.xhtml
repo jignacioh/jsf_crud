@@ -9,15 +9,15 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
 
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets" >
- 
+
     <h:body>
         <ui:composition>
             <h:panelGrid>
                 <h:graphicImage  url="/images/logo.jpg"
                                  alt="CIBERTEC - DAT"
                                  height="100px"/>
-                <h:outputText style="text-align: center; font-size: 36px"
-                              value="JAVA MASTER DEVELOPER"/>
+                <h:outputFormat style="text-align: center; font-size: 24px" value="Bienvenido #{loginController.usuario.username}">
+                </h:outputFormat>
             </h:panelGrid>
 
         </ui:composition>

@@ -2,6 +2,7 @@ com\cibertec\crudpracticamaven\controller\UpdateController.class
 com\cibertec\crudpracticamaven\controller\LoginController.class
 com\cibertec\crudpracticamaven\controller\CatalogoController.class
 com\cibertec\crudpracticamaven\model\Usuario.class
+com\cibertec\crudpracticamaven\model\Factura.class
 com\cibertec\crudpracticamaven\model\Cliente.class
 com\cibertec\crudpracticamaven\controller\MantenimientoController.class
 com\cibertec\crudpracticamaven\controller\ClienteController.class

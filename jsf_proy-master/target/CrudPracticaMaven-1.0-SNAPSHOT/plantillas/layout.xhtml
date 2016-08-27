@@ -18,23 +18,24 @@ and open the template in the editor.
         <div id="contenedor">
             <div id="cabecera">
                 <ui:insert name="header">
-                     <h:form>
-                <p:menubar>
-                    <p:menuitem value="Usuarios" url="faces/usuarios.xhtml"/>
-                    <p:menuitem value="Productos" url="faces/mantenimiento.xhtml"/>
-                    <p:menuitem value="Factura" url="faces/catalogo.xhtml"/>
-                </p:menubar>
-            </h:form>
+                    <h:form>
+                        <ui:include src="/comun/cabecera.xhtml"/>
+                        <p:menubar>
+                            <p:menuitem value="Usuarios" url="faces/usuarios.xhtml"/>
+                            <p:menuitem value="Productos" url="faces/mantenimiento.xhtml"/>
+                            <p:menuitem value="Comprar" url="faces/catalogo.xhtml"/>
+                        </p:menubar>
+                    </h:form>
                 </ui:insert>
             </div>
             <div id="menu">
                 <ui:insert name="menus">
-                    
+
                 </ui:insert>
             </div>
             <div id="cuerpo">
                 <ui:insert name="body">
-                    
+
                 </ui:insert>
             </div>
             <div id="pie">
